@@ -77,6 +77,11 @@
             text-decoration: none;
             color: var(--text-dark);
             font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-green);
         }
 
         .user-badge {
@@ -91,18 +96,18 @@
         /* 英雄區塊 */
         .hero {
             background: linear-gradient(135deg, var(--light-green) 0%, var(--light-yellow) 100%);
-            padding: 4rem 2rem;
+            padding: 4.5rem 2rem;
             text-align: center;
         }
 
         .hero h1 {
-            font-size: 2.5rem;
+            font-size: 2.6rem;
             color: var(--dark-green);
             margin-bottom: 1rem;
         }
 
         .hero p {
-            font-size: 1.1rem;
+            font-size: 1.15rem;
             color: var(--primary-green);
             margin-bottom: 2rem;
         }
@@ -125,7 +130,7 @@
             border: 2px solid var(--accent-yellow);
         }
 
-        /* 站點選擇與訂閱流程 */
+        /* 訂閱與物流配置核心區 */
         .step-container {
             max-width: 1000px;
             margin: -3rem auto 3rem auto;
@@ -138,18 +143,19 @@
         }
 
         .step-title {
-            font-size: 1.5rem;
+            font-size: 1.35rem;
             color: var(--dark-green);
-            margin-bottom: 1.5rem;
+            margin: 2rem 0 1rem 0;
             border-bottom: 2px solid var(--light-green);
             padding-bottom: 0.5rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            font-weight: bold;
         }
 
         .station-selector {
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             background: var(--light-yellow);
             padding: 1.5rem;
             border-radius: 12px;
@@ -172,8 +178,110 @@
             background: var(--white);
         }
 
+        /* 物流選項卡片 UI */
+        .logistics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .logistics-card {
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 1.2rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+            background: var(--white);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .logistics-card:hover {
+            border-color: var(--primary-green);
+            background: #f8fdf9;
+        }
+
+        .logistics-card.active {
+            border-color: var(--primary-green);
+            background: var(--light-green);
+            box-shadow: 0 4px 10px rgba(45, 106, 79, 0.15);
+        }
+
+        .logistics-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .logistics-title {
+            font-weight: bold;
+            color: var(--dark-green);
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .logistics-price {
+            font-weight: 900;
+            color: var(--primary-green);
+            background: var(--white);
+            padding: 0.2rem 0.6rem;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            border: 1px solid var(--primary-green);
+        }
+
+        .logistics-desc {
+            font-size: 0.85rem;
+            color: var(--gray);
+            margin-bottom: 0.8rem;
+        }
+
+        .logistics-tip {
+            font-size: 0.8rem;
+            color: var(--dark-green);
+            background: rgba(255, 255, 255, 0.7);
+            padding: 0.4rem 0.6rem;
+            border-radius: 6px;
+            font-weight: 500;
+        }
+
+        .time-slot-container {
+            display: none;
+            margin-top: 1rem;
+            padding: 1rem;
+            background: #f1f5f9;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary-green);
+        }
+
+        .time-slot-container.show {
+            display: block;
+        }
+
+        .time-slot-container label {
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: var(--dark-green);
+            margin-right: 10px;
+        }
+
+        .time-slot-container select {
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            border: 1px solid #cbd5e1;
+            font-size: 0.9rem;
+            outline: none;
+        }
+
+        /* 盲盒避雷針系統 */
         .dislike-section {
-            margin-bottom: 2.5rem;
+            margin-bottom: 1.5rem;
         }
 
         .dislike-section p {
@@ -211,6 +319,7 @@
             font-weight: bold;
         }
 
+        /* 訂閱方案卡片 */
         .plans-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -300,7 +409,57 @@
             background-color: #fca311;
         }
 
-        /* === 契作小農與純粹農場實景 === */
+        /* === 補回：為什麼適合新市鎮（四大核心優點） === */
+        .info-section {
+            max-width: 1100px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .info-section h2 {
+            font-size: 2.2rem;
+            color: var(--dark-green);
+            margin-bottom: 0.5rem;
+        }
+
+        .info-section p.sub-title {
+            color: var(--primary-green);
+            font-size: 1.1rem;
+            margin-bottom: 3rem;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 1.8rem;
+        }
+
+        .info-box {
+            background: var(--white);
+            padding: 2rem 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.04);
+            border-top: 4px solid var(--primary-green);
+            transition: transform 0.3s;
+        }
+
+        .info-box:hover {
+            transform: translateY(-5px);
+        }
+
+        .info-box h3 {
+            color: var(--primary-green);
+            margin: 1rem 0 0.5rem 0;
+            font-size: 1.25rem;
+        }
+
+        .info-box p {
+            color: var(--gray);
+            font-size: 0.95rem;
+        }
+
+        /* === 補回：契作小農與純粹農場實景 (無人像) === */
         .farmers-section {
             background-color: var(--light-green);
             padding: 5rem 2rem;
@@ -420,33 +579,6 @@
             border-radius: 4px;
         }
 
-        /* 為什麼選擇新市鎮訂閱 */
-        .info-section {
-            max-width: 1000px;
-            margin: 5rem auto;
-            padding: 0 2rem;
-            text-align: center;
-        }
-
-        .info-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .info-box {
-            background: var(--white);
-            padding: 1.5rem;
-            border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.03);
-        }
-
-        .info-box h3 {
-            color: var(--primary-green);
-            margin: 0.8rem 0;
-        }
-
         footer {
             background-color: var(--dark-green);
             color: var(--light-green);
@@ -464,8 +596,8 @@
             </a>
             <ul class="nav-links">
                 <li><a href="#subscribe">訂閱方案</a></li>
+                <li><a href="#advantages">為什麼選我們</a></li>
                 <li><a href="#farmers">契作產地實景</a></li>
-                <li><a href="#how">運作方式</a></li>
             </ul>
             <div class="user-badge">📍 服務區域：淡海新市鎮</div>
         </div>
@@ -473,34 +605,78 @@
 
     <section class="hero">
         <h1>開箱！小農為你配好的當季健康</h1>
-        <p>物流訂閱免運費 × 專屬社區智慧冷藏櫃 × 媽媽不再為煮菜煩惱<br>清晨產地採收，傍晚直接送達你家樓下冰箱！</p>
+        <p>短鏈冷鏈配送 × 彈性取貨時間 × 專人保鮮送上樓<br>清晨產地採收，依照你最習慣的生活作息準時送達！</p>
         <div class="tags-container">
             <span class="hero-tag">🌾 在地小農</span>
-            <span class="hero-tag">🥬 100% 有機友善</span>
-            <span class="hero-tag">⚡ 當季盲盒</span>
+            <span class="hero-tag">⚡ 短鏈極速物流</span>
+            <span class="hero-tag">❄️ 全程冷藏保鮮</span>
             <span class="hero-tag">🛡️ 可挑除不吃食材</span>
         </div>
     </section>
 
-    <!-- 訂閱與避雷互動區 -->
+    <!-- 核心功能區：站點、物流、避雷、訂閱 -->
     <div class="step-container" id="subscribe">
+        
         <div class="station-selector">
-            <label for="station">第一步：選擇你居住的大樓社區（智慧冰箱據點）</label>
-            <select id="station" onchange="updateStation()">
-                <option value="">請選擇新市鎮取貨據點...</option>
-                <option value="海洋都心">📍 海洋都心 1-3期 (中庭管理室旁冷藏櫃)</option>
-                <option value="宏盛新世界">📍 宏盛新世界 / 蒙地卡羅 (A區迎賓廳據點)</option>
-                <option value="台北灣系列">📍 台北灣-江南大宅 / 觀海 (社區俱樂部據點)</option>
-                <option value="新市國小學區">📍 新市國小周遭 (合作連鎖早午餐店取貨點)</option>
+            <label for="station">第一步：選擇你居住的大樓社區 / 配送區域</label>
+            <select id="station">
+                <option value="">請選擇新市鎮社區據點...</option>
+                <option value="海洋都心">📍 海洋都心 1-3期 (已建置智慧冷藏櫃)</option>
+                <option value="宏盛新世界">📍 宏盛新世界 / 蒙地卡羅 (已建置智慧冷藏櫃)</option>
+                <option value="台北灣系列">📍 台北灣-江南大宅 / 觀海 (社區管理室代收區)</option>
+                <option value="淡海新市鎮其他大樓">📍 新市鎮其他社區大樓 (適用：專人送上樓 / 店家代收)</option>
             </select>
         </div>
 
-        <div class="dislike-section">
-            <div class="step-title">
-                <span>第二步：盲盒避雷針（點擊「剔除」家人不吃的食材）</span>
-                <span style="font-size: 0.9rem; color: var(--alert-red); font-weight: normal;">*小農配菜時會為您自動替換</span>
+        <div class="step-title" id="logistics-section">第二步：選擇最適合你的「冷鏈物流與取貨方式」</div>
+        <div class="logistics-grid">
+            <div class="logistics-card active" onclick="selectLogistics(this, '智慧冷藏櫃自取', 0, false)">
+                <div>
+                    <div class="logistics-header">
+                        <span class="logistics-title">❄️ 樓下智慧冷藏櫃</span>
+                        <span class="logistics-price">免運費</span>
+                    </div>
+                    <p class="logistics-desc">物流直接配送進社區 1F 保鮮櫃，系統發送開櫃取件碼。</p>
+                </div>
+                <div class="logistics-tip">💡 適合：常加班、需要 24H 隨時彈性取菜的住戶。</div>
             </div>
-            <p>盲盒享受當季驚喜，但我們尊重家人的喜好！請勾選<b>絕對不希望收到</b>的作物：</p>
+
+            <div class="logistics-card" onclick="selectLogistics(this, '管理室保冷袋代收', 30, false)">
+                <div>
+                    <div class="logistics-header">
+                        <span class="logistics-title">🏢 管理室 / 店家代收</span>
+                        <span class="logistics-price">+NT$ 30 /次</span>
+                    </div>
+                    <p class="logistics-desc">採用「專利厚保冷袋 + 蓄冷冰磚」送至社區大廳或特約店家。</p>
+                </div>
+                <div class="logistics-tip">💡 適合：社區尚未建置機台，但大廳管理員可協助代收者。</div>
+            </div>
+
+            <div class="logistics-card" onclick="selectLogistics(this, '專人夜間冷鏈送上樓', 80, true)">
+                <div>
+                    <div class="logistics-header">
+                        <span class="logistics-title">🚪 專人冷鏈夜間送門口</span>
+                        <span class="logistics-price">+NT$ 80 /次</span>
+                    </div>
+                    <p class="logistics-desc">由短鏈配送員下班時段直接親送至家門口，免去下樓搬運。</p>
+                </div>
+                <div class="logistics-tip">💡 適合：家中有長輩、育兒不便下樓或採購大份量蔬菜箱者。</div>
+            </div>
+        </div>
+
+        <!-- 隱藏時段選擇區 -->
+        <div class="time-slot-container" id="time-slot-box">
+            <label for="time-slot">⏰ 請指定專人夜間送達時段：</label>
+            <select id="time-slot">
+                <option value="17:00 - 18:30 (傍晚時段)">17:00 - 18:30 (傍晚下班/料理前)</option>
+                <option value="18:30 - 20:00 (晚間時段)">18:30 - 20:00 (晚間時段，最熱門)</option>
+                <option value="20:00 - 21:00 (夜間時段)">20:00 - 21:00 (夜間稍晚時段)</option>
+            </select>
+        </div>
+
+        <div class="step-title" style="margin-top: 2rem;">第三步：盲盒避雷針（剔除家人不吃的食材）</div>
+        <div class="dislike-section">
+            <p>請勾選<b>絕對不希望收到</b>的作物（小農配菜時會自動為您替換為同等值當季蔬菜）：</p>
             <div class="veggie-grid">
                 <input type="checkbox" id="v1" class="veggie-checkbox" value="青椒"><label for="v1" class="veggie-label">🚫 青椒 / 彩椒</label>
                 <input type="checkbox" id="v2" class="veggie-checkbox" value="苦瓜"><label for="v2" class="veggie-label">🚫 苦瓜</label>
@@ -508,12 +684,10 @@
                 <input type="checkbox" id="v4" class="veggie-checkbox" value="秋葵"><label for="v4" class="veggie-label">🚫 秋葵</label>
                 <input type="checkbox" id="v5" class="veggie-checkbox" value="芋頭"><label for="v5" class="veggie-label">🚫 芋頭</label>
                 <input type="checkbox" id="v6" class="veggie-checkbox" value="紅蘿蔔"><label for="v6" class="veggie-label">🚫 紅蘿蔔</label>
-                <input type="checkbox" id="v7" class="veggie-checkbox" value="洋蔥"><label for="v7" class="veggie-label">🚫 洋蔥</label>
-                <input type="checkbox" id="v8" class="veggie-checkbox" value="韭菜"><label for="v8" class="veggie-label">🚫 韭菜</label>
             </div>
         </div>
 
-        <div class="step-title">第三步：選擇家庭訂閱方案（含樓下物流保鮮服務）</div>
+        <div class="step-title">第四步：選擇家庭訂閱方案</div>
         <div class="plans-grid">
             <div class="plan-card">
                 <div class="plan-name">🥦 輕鬆體驗小箱</div>
@@ -523,7 +697,6 @@
                     <li>當季有機葉菜 4 款</li>
                     <li>產地甜美根莖/瓜果 2 款</li>
                     <li>附贈農場生產履歷卡片</li>
-                    <li><b>已含社區冰箱物流保鮮費</b></li>
                 </ul>
                 <button class="btn-subscribe" onclick="subscribe('輕鬆體驗小箱', 499)">預約雙周配服務</button>
             </div>
@@ -538,14 +711,43 @@
                     <li>產地甜美根莖/瓜果 3 款</li>
                     <li><b>放牧快樂土雞蛋 1 盒 (10入)</b></li>
                     <li><b>享有盲盒許願池優先替換權</b></li>
-                    <li><b>已含社區冰箱物流保鮮費</b></li>
                 </ul>
-                <button class="btn-subscribe" onclick="subscribe('活力當季盲盒大箱', 799)">預約每周送進家樓下</button>
+                <button class="btn-subscribe" onclick="subscribe('活力當季盲盒大箱', 799)">預約每周送達</button>
             </div>
         </div>
+
     </div>
 
-    <!-- === 替換後的風景照：純粹自然、環境與作物特寫 === -->
+    <!-- === 補回：為什麼選我們（四大核心優點展示） === -->
+    <section class="info-section" id="advantages">
+        <h2>為什麼新市鎮的家庭都選擇我們？</h2>
+        <p class="sub-title">解決現代雙薪家庭與社區的生鮮痛點，讓在地良食成為美好的日常</p>
+        
+        <div class="info-grid">
+            <div class="info-box">
+                <div style="font-size: 2.8rem;">⏱️</div>
+                <h3>省下每日 2 小時</h3>
+                <p>通勤回淡水已經好累，不用再趕去傳統市場人擠人，下班下樓開冰箱，取菜就能馬上料理。</p>
+            </div>
+            <div class="info-box">
+                <div style="font-size: 2.8rem;">👨‍🌾</div>
+                <h3>專治選擇障礙</h3>
+                <p>當季小農盲盒配菜！大地收成什麼就吃什麼，天天有變化，還能透過「避雷針」自動跳過家人不吃的食材。</p>
+            </div>
+            <div class="info-box">
+                <div style="font-size: 2.8rem;">❄️</div>
+                <h3>全程冷鏈・絕不失溫</h3>
+                <p>送進社區專屬智慧冷藏櫃或專人夜間配送，徹底告別常規宅配因「無人收件」而在大廳放壞的煩惱。</p>
+            </div>
+            <div class="info-box">
+                <div style="font-size: 2.8rem;">🌱</div>
+                <h3>低碳短鏈・產地直通</h3>
+                <p>嚴選淡水、三芝周遭 15 公里內契作農莊。縮短食物里程，從田間到餐桌最快只要半天，極致新鮮！</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- === 補回：契作小農與純粹農場實景 (無人像) === -->
     <section class="farmers-section" id="farmers">
         <div class="section-header">
             <h2>誰為我們種下這週的美味？</h2>
@@ -553,7 +755,6 @@
         </div>
         <div class="farmers-grid">
             
-            <!-- 農場風景 1：青翠葉菜與農田大地 -->
             <div class="farmer-card">
                 <div class="farmer-img" style="background-image: url('https://images.unsplash.com/photo-1574943320219-553eb213f72d?auto=format&fit=crop&w=600&q=80');">
                     <div class="location-tag">📍 淡水區・公司田溪流域</div>
@@ -572,7 +773,6 @@
                 </div>
             </div>
 
-            <!-- 農場風景 2：溫室鮮紅番茄特寫 -->
             <div class="farmer-card">
                 <div class="farmer-img" style="background-image: url('https://images.unsplash.com/photo-1592841200221-a6898f307baa?auto=format&fit=crop&w=600&q=80');">
                     <div class="location-tag">📍 三芝區・大屯山麓</div>
@@ -591,7 +791,6 @@
                 </div>
             </div>
 
-            <!-- 農場風景 3：廣闊丘陵與自然綠草地 -->
             <div class="farmer-card">
                 <div class="farmer-img" style="background-image: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=600&q=80');">
                     <div class="location-tag">📍 石門區・老梅丘陵</div>
@@ -613,45 +812,35 @@
         </div>
     </section>
 
-    <!-- 為什麼適合新市鎮 -->
-    <section class="info-section" id="how">
-        <h2 style="color: var(--dark-green);">為什麼新市鎮的家庭都需要「盲盒蔬菜箱」？</h2>
-        <div class="info-grid">
-            <div class="info-box">
-                <div style="font-size: 2.5rem;">⏱️</div>
-                <h3>省下 2 小時採買時間</h3>
-                <p>下班通勤回淡水已經好累，不用再趕去老街市場或超市人擠人，下樓開冰箱直接拿回家煮。</p>
-            </div>
-            <div class="info-box">
-                <div style="font-size: 2.5rem;">👨‍🌾</div>
-                <h3>專治「煮飯選擇障礙」</h3>
-                <p>不知道明天帶便當煮什麼？小農當季收成什麼，你就煮什麼！天天吃得有變化又順應時令。</p>
-            </div>
-            <div class="info-box">
-                <div style="font-size: 2.5rem;">❄️</div>
-                <h3>社區專屬・絕不失溫</h3>
-                <p>物流直接配送進社區專屬智慧冷藏櫃，不會像一般宅配因為無人收件而在大廳常溫放壞掉。</p>
-            </div>
-        </div>
-    </section>
-
     <footer>
         <p>🌱 家樓下的微農場 | 專為淡海新市鎮社區設計的綠色生鮮短鏈</p>
         <p style="font-size: 0.8rem; color: #8d99ae; margin-top: 1rem;">© 2026 產地直達社區物流訂閱團隊 All Rights Reserved.</p>
     </footer>
 
     <script>
-        function updateStation() {
-            const station = document.getElementById('station').value;
-            if(station) {
-                alert("📍 已綁定配送據點：「" + station + "」！\n為您顯示該據點本周小農配送車次。");
+        let selectedLogisticsName = "智慧冷藏櫃自取";
+        let logisticsFee = 0;
+
+        function selectLogistics(cardElement, name, fee, showTimeSlot) {
+            const cards = document.querySelectorAll('.logistics-card');
+            cards.forEach(card => card.classList.remove('active'));
+            
+            cardElement.classList.add('active');
+            selectedLogisticsName = name;
+            logisticsFee = fee;
+
+            const timeBox = document.getElementById('time-slot-box');
+            if (showTimeSlot) {
+                timeBox.classList.add('show');
+            } else {
+                timeBox.classList.remove('show');
             }
         }
 
-        function subscribe(planName, price) {
+        function subscribe(planName, basePrice) {
             const station = document.getElementById('station').value;
             if (!station) {
-                alert("⚠️ 請先在第一步選擇您家樓下或附近的【新市鎮社區據點】喔！");
+                alert("⚠️ 請先在第一步選擇您家樓下或附近的【社區大樓據點】喔！");
                 document.getElementById('station').focus();
                 return;
             }
@@ -661,10 +850,18 @@
             checkboxes.forEach((cb) => {
                 dislikes.push(cb.value);
             });
+            let dislikeMsg = dislikes.length > 0 ? "\n🚫 避雷清單：" + dislikes.join("、 ") : "\n✨ 避雷清單：無 (什麼都吃！)";
 
-            let dislikeMsg = dislikes.length > 0 ? "\n🚫 避雷清單：" + dislikes.join("、 ") : "\n✨ 避雷清單：無 (什麼都吃，太棒了！)";
+            let timeMsg = "";
+            if (selectedLogisticsName === "專人夜間冷鏈送上樓") {
+                const timeSlot = document.getElementById('time-slot').value;
+                timeMsg = "\n⏰ 指定配送時段：" + timeSlot;
+            }
 
-            alert("🎉 訂閱設定成功！\n\n📦 選擇方案：" + planName + " (NT$ " + price + "/次)\n📍 配送站點：" + station + dislikeMsg + "\n\n即將跳轉至信用卡與物流定時扣款授權頁面...");
+            const totalPrice = basePrice + logisticsFee;
+            let feeMsg = logisticsFee > 0 ? ` (含物流保鮮費 NT$ ${logisticsFee})` : " (物流免運費)";
+
+            alert(`🎉 訂閱設定成功！\n\n📦 選擇方案：${planName}\n🏠 配送區域：${station}\n🚚 物流方式：${selectedLogisticsName}${timeMsg}\n💵 每次配送總計：NT$ ${totalPrice}${feeMsg}${dislikeMsg}\n\n即將跳轉至信用卡授權與綠色物流排程頁面...`);
         }
     </script>
 </body>
