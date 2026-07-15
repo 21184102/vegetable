@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>實際使用情境與說明 | 家樓下的微農場</title>
+    <style>
+        :root {
+            --primary-green: #2d6a4f;
+            --light-green: #d8f3dc;
+            --dark-green: #1b4332;
+            --accent-yellow: #ffb703;
+            --light-yellow: #fefae0;
+            --text-dark: #2b2d42;
+            --white: #ffffff;
+            --gray: #8d99ae;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: "PingFang TC", "Microsoft JhengHei", sans-serif;
+        }
+
+        body {
+            background-color: #f4fbf6;
+            color: var(--text-dark);
+            line-height: 1.8;
+        }
+
+        /* 頂部導覽 */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: var(--primary-green);
+            text-decoration: none;
+        }
+
+        .btn-back {
+            background-color: var(--primary-green);
+            color: var(--white);
+            text-decoration: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: background 0.3s;
+        }
+
+        .btn-back:hover {
+            background-color: var(--dark-green);
+        }
+
+        /* 頁面標題區 */
+        .page-header {
+            background: var(--dark-green);
+            color: var(--white);
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            color: var(--accent-yellow);
+            margin-bottom: 0.8rem;
+        }
+
+        .page-header p {
+            font-size: 1.15rem;
+            color: var(--light-green);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* 圖文列表區塊 */
+        .content-container {
+            max-width: 1000px;
+            margin: -2rem auto 4rem auto;
+            background: var(--white);
+            padding: 3rem 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.06);
+        }
+
+        .situation-row {
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
+            margin-bottom: 3.5rem;
+            padding-bottom: 3.5rem;
+            border-bottom: 2px dashed #e2e8f0;
+        }
+
+        .situation-row:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        /* 偶數列左右反轉，增加視覺節奏 */
+        .situation-row:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .img-box {
+            flex: 1;
+            height: 260px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 16px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            position: relative;
+        }
+
+        .tag-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: var(--accent-yellow);
+            color: var(--dark-green);
+            font-weight: 900;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .text-box {
+            flex: 1.2;
+            background: #fdfefd;
+            padding: 2rem;
+            border-radius: 16px;
+            border: 2px solid var(--light-green);
+            position: relative;
+        }
+
+        .text-box h3 {
+            color: var(--dark-green);
+            font-size: 1.35rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .text-box p {
+            color: var(--text-dark);
+            font-size: 1.05rem;
+            text-align: justify;
+        }
+
+        .highlight-bar {
+            margin-top: 1.2rem;
+            background: var(--light-yellow);
+            padding: 0.8rem 1rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            color: var(--dark-green);
+            font-weight: bold;
+            border-left: 4px solid var(--accent-yellow);
+        }
+
+        /* 底部行動呼籲 */
+        .cta-footer {
+            text-align: center;
+            background: var(--light-green);
+            padding: 4rem 2rem;
+            border-radius: 20px;
+            max-width: 1000px;
+            margin: 0 auto 4rem auto;
+        }
+
+        .cta-footer h2 {
+            font-size: 2rem;
+            color: var(--dark-green);
+            margin-bottom: 1rem;
+        }
+
+        .btn-large {
+            background-color: var(--accent-yellow);
+            color: var(--dark-green);
+            text-decoration: none;
+            padding: 1rem 3rem;
+            border-radius: 12px;
+            font-size: 1.2rem;
+            font-weight: 900;
+            display: inline-block;
+            margin-top: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+
+        .btn-large:hover {
+            background-color: #fca311;
+            transform: translateY(-2px);
+        }
+
+        footer {
+            background-color: var(--dark-green);
+            color: var(--light-green);
+            text-align: center;
+            padding: 3rem 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .situation-row, .situation-row:nth-child(even) {
+                flex-direction: column;
+            }
+            .img-box {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo">🌱 家樓下的微農場｜實施現況藍圖</a>
+            <a href="index.html" class="btn-back">⬅ 返回首頁訂閱</a>
+        </div>
+    </header>
+
+    <div class="page-header">
+        <h1>實際使用情境與說明</h1>
+        <p>看我們如何串聯科技物聯網、外送物流與大眾運輸，為淡海新市鎮打造一站式低碳生鮮服務！</p>
+    </div>
+
+    <main class="content-container">
+
+        <!-- 1. 農地取貨站 × 外送員自取 -->
+        <div class="situation-row">
+            <div class="img-box" style="background-image: url('https://images.unsplash.com/photo-1597362925123-77861d3fbac7?auto=format&fit=crop&w=600&q=80');">
+                <span class="tag-badge">01. 產地即時轉運</span>
+            </div>
+            <div class="text-box">
+                <h3>🛵 農地取貨站 × 媒合外送物流</h3>
+                <p>在農地設置蔬果取貨站，並藉由 Lalamove、Foodpanda 等即時外送平台，讓外送員可以到農地蔬果站自取商品，再極速配送到個個站點。再經由即時銷售情況的偵測系統，通知小農需要補貨哪些貨品。</p>
+                <div class="highlight-bar">⚡ 創新突破：無需自建龐大車隊，共享即時外送網絡，IoT 智慧回報補貨需求！</div>
+            </div>
+        </div>
+
+        <!-- 2. 在家輕鬆購物 × 蔬菜盲盒 -->
+        <div class="situation-row">
+            <div class="img-box" style="background-image: url('https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=600&q=80');">
+                <span class="tag-badge">02. 居家線上下單</span>
+            </div>
+            <div class="text-box">
+                <h3>💻 居家輕鬆購 × 蔬菜盲盒訂閱</h3>
+                <p>消費者可以輕鬆地在家購物，不必出門就可以在網站上瀏覽及購買在地小農的天然加工產品（果乾、茶包、果醬等），並準時收到每月訂閱的當季蔬果盲盒。</p>
+                <div class="highlight-bar">🌾 貼心設計：提供「避雷針」系統，可自訂挑除不吃食材，主婦煮飯零煩惱。</div>
+            </div>
+        </div>
+
+        <!-- 3. 參觀可耕作農園 × 食農教育 -->
+        <div class="situation-row">
+            <div class="img-box" style="background-image: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=600&q=80');">
+                <span class="tag-badge">03. 食農教育溯源</span>
+            </div>
+            <div class="text-box">
+                <h3>👨‍👩‍👧‍👦 產地透明資訊 × 親子食農體驗</h3>
+                <p>消費者可以在平台上直接接觸到淡水在地可參觀、可耕作農園的透明資訊，並可以進一步到農場參與生產與採果體驗，平台也定期舉辦食農教育與手作等活動。</p>
+                <div class="highlight-bar">🌱 深度連結：平日吃小農的健康蔬菜，週末帶小孩親自走進農莊感受土地！</div>
+            </div>
+        </div>
+
+        <!-- 4. 媒合契作 × 餐廳吃到買到 -->
+        <div class="situation-row">
+            <div class="img-box" style="background-image: url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=600&q=80');">
+                <span class="tag-badge">04. 餐廳契作合作</span>
+            </div>
+            <div class="text-box">
+                <h3>🍽️ 餐廳契作產桌 × 實體選品專區</h3>
+                <p>平台媒合在地餐廳與商圈契作以後，消費者可以在合作餐廳吃到結合在地新鮮食材的特色料理，也可以直接在餐廳店內，購買到農地產出的加工食品及特色農產。</p>
+                <div class="highlight-bar">🤝 雙向雙贏：為餐廳打造「在地食材專屬特色」，同時增加農產的線下銷售通路。</div>
+            </div>
+        </div>
+
+        <!-- 5. 輕軌站結合販賣機 (直接為你換上這張你指定最強的輕軌販賣機圖片！) -->
+        <div class="situation-row">
+            <div class="img-box" style="background-image: url('image_3e647f.jpg');">
+                <span class="tag-badge">05. 通勤節點佈局</span>
+            </div>
+            <div class="text-box">
+                <h3>🚈 輕軌站結合小農蔬果販賣機</h3>
+                <p>將生鮮販賣機設置在淡海輕軌站等交通樞紐（如紅樹林站、行政中心站），服務現代人緊湊的通勤生活。系統自動偵測銷售狀況，並即時掌控銷售與補貨狀況，讓下班回家路上隨手就能買到好菜。</p>
+                <div class="highlight-bar">💡 解決痛點：不用下班趕去傳統市場，出站即買，分秒不浪費！</div>
+            </div>
+        </div>
+
+        <!-- 6. 外送直送社區管理室 -->
+        <div class="situation-row">
+            <div class="img-box" style="background-image: url('https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=600&q=80');">
+                <span class="tag-badge">06. 末端社區交付</span>
+            </div>
+            <div class="text-box">
+                <h3>🏢 結合外送平台 × 直送管理室保鮮</h3>
+                <p>平台結合 Lalamove、Foodpanda 等即時外送物流，將小農蔬果直接外送至新市鎮各社區管理室或代收點，讓消費者不必出門，下班在家樓下就能夠拿到新鮮的在地蔬果。</p>
+                <div class="highlight-bar">❄️ 極致便利：搭配保冷袋或社區冰箱，解決一般常溫宅配無人收件的尷尬。</div>
+            </div>
+        </div>
+
+    </main>
+
+    <div class="cta-footer">
+        <h2>看完藍圖，準備好體驗家樓下的新鮮了嗎？</h2>
+        <p style="color: var(--primary-green); font-size: 1.1rem;">挑選你居住的社區與配送物流，每週為家人預約最安心的當季蔬果箱！</p>
+        <a href="index.html#subscribe" class="btn-large">🛒 立即選擇配送站點與訂閱方案</a>
+    </div>
+
+    <footer>
+        <p>🌱 家樓下的微農場 | 專為淡海新市鎮社區設計的綠色生鮮短鏈 × 在地共榮平台</p>
+        <p style="font-size: 0.8rem; color: #8d99ae; margin-top: 1rem;">© 2026 產地直達社區物流訂閱團隊 All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>
