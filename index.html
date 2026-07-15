@@ -2,7 +2,7 @@
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>家樓下的微農場 | 淡海新市鎮・有機小農盲盒訂閱 × 在地生態系</title>
     <style>
         :root {
@@ -15,7 +15,6 @@
             --white: #ffffff;
             --gray: #8d99ae;
             --alert-red: #e63946;
-            --blue-accent: #219ebc;
         }
 
         * {
@@ -29,6 +28,7 @@
             background-color: #f8fdf9;
             color: var(--text-dark);
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
         /* 導覽列 */
@@ -47,6 +47,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
         }
 
         .logo {
@@ -72,6 +73,7 @@
             gap: 1.2rem;
             list-style: none;
             align-items: center;
+            flex-wrap: wrap;
         }
 
         .nav-links a {
@@ -106,6 +108,7 @@
             font-size: 2.6rem;
             color: var(--dark-green);
             margin-bottom: 1rem;
+            line-height: 1.3;
         }
 
         .hero p {
@@ -130,6 +133,7 @@
             font-weight: bold;
             box-shadow: 0 2px 5px rgba(0,0,0,0.05);
             border: 2px solid var(--accent-yellow);
+            font-size: 0.9rem;
         }
 
         /* 核心訂閱與精簡物流配置區 */
@@ -154,6 +158,8 @@
             justify-content: space-between;
             align-items: center;
             font-weight: bold;
+            flex-wrap: wrap;
+            gap: 0.5rem;
         }
 
         .station-selector {
@@ -182,7 +188,7 @@
 
         .logistics-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 1.5rem;
             margin-bottom: 1.5rem;
         }
@@ -200,11 +206,6 @@
             justify-content: space-between;
         }
 
-        .logistics-card:hover {
-            border-color: var(--primary-green);
-            background: #f8fdf9;
-        }
-
         .logistics-card.active {
             border-color: var(--primary-green);
             background: var(--light-green);
@@ -216,12 +217,14 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 0.8rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
         }
 
         .logistics-title {
             font-weight: bold;
             color: var(--dark-green);
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             display: flex;
             align-items: center;
             gap: 8px;
@@ -237,10 +240,11 @@
             border: 1px solid var(--primary-green);
         }
 
-        .logistics-desc {
+        .logistics-desc, .logistics-tip {
             font-size: 0.95rem;
             color: var(--gray);
             margin-bottom: 1rem;
+            line-height: 1.5;
         }
 
         .logistics-tip {
@@ -269,9 +273,7 @@
             gap: 0.8rem;
         }
 
-        .veggie-checkbox {
-            display: none;
-        }
+        .veggie-checkbox { display: none; }
 
         .veggie-label {
             background: #f1f5f9;
@@ -281,8 +283,8 @@
             cursor: pointer;
             transition: all 0.2s;
             font-size: 0.95rem;
-            border: 1px solid transparent;
             user-select: none;
+            display: inline-block;
         }
 
         .veggie-checkbox:checked + .veggie-label {
@@ -303,8 +305,8 @@
             border-radius: 15px;
             padding: 1.5rem;
             text-align: center;
-            transition: all 0.3s;
             position: relative;
+            background: var(--white);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -327,13 +329,7 @@
             border-radius: 12px;
             font-size: 0.8rem;
             font-weight: bold;
-        }
-
-        .plan-name {
-            font-size: 1.3rem;
-            color: var(--dark-green);
-            font-weight: bold;
-            margin-top: 0.5rem;
+            white-space: nowrap;
         }
 
         .plan-price {
@@ -343,12 +339,6 @@
             margin: 1rem 0;
         }
 
-        .plan-price span {
-            font-size: 0.9rem;
-            color: var(--gray);
-            font-weight: normal;
-        }
-
         .plan-features {
             list-style: none;
             text-align: left;
@@ -356,13 +346,8 @@
             font-size: 0.95rem;
         }
 
-        .plan-features li {
-            margin-bottom: 0.5rem;
-        }
-
-        .plan-features li::before {
-            content: "✅ ";
-        }
+        .plan-features li { margin-bottom: 0.5rem; }
+        .plan-features li::before { content: "✅ "; }
 
         .btn-subscribe {
             background-color: var(--accent-yellow);
@@ -374,11 +359,6 @@
             font-size: 1rem;
             cursor: pointer;
             width: 100%;
-            transition: background 0.3s;
-        }
-
-        .btn-subscribe:hover {
-            background-color: #fca311;
         }
 
         /* 跳轉導引卡片專區 */
@@ -396,29 +376,15 @@
             padding: 3rem 2.5rem;
             box-shadow: 0 15px 30px rgba(0,0,0,0.06);
             border: 3px solid var(--accent-yellow);
-            position: relative;
-            overflow: hidden;
         }
 
-        .redirect-card h2 {
-            font-size: 2.2rem;
-            color: var(--dark-green);
-            margin-bottom: 1rem;
-        }
-
-        .redirect-card p {
-            color: var(--primary-green);
-            font-size: 1.15rem;
-            margin-bottom: 2rem;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
+        .redirect-card h2 { font-size: 2.2rem; color: var(--dark-green); margin-bottom: 1rem; line-height: 1.3; }
+        .redirect-card p { color: var(--primary-green); font-size: 1.15rem; margin-bottom: 2rem; }
 
         .redirect-features {
             display: flex;
             justify-content: center;
-            gap: 1.5rem;
+            gap: 1rem;
             margin-bottom: 2.5rem;
             flex-wrap: wrap;
         }
@@ -426,60 +392,58 @@
         .rf-item {
             background: #f8fdf9;
             border: 1px solid #e2e8f0;
-            padding: 0.8rem 1.2rem;
+            padding: 0.6rem 1rem;
             border-radius: 12px;
             font-weight: bold;
             color: var(--dark-green);
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            font-size: 0.9rem;
         }
 
         .btn-redirect {
             background-color: var(--dark-green);
             color: var(--accent-yellow);
             text-decoration: none;
-            padding: 1rem 2.5rem;
+            padding: 1rem 2rem;
             border-radius: 12px;
-            font-size: 1.2rem;
-            font-weight: 900;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            transition: all 0.3s;
-            box-shadow: 0 8px 16px rgba(27, 67, 50, 0.2);
-        }
-
-        .btn-redirect:hover {
-            background-color: var(--primary-green);
-            color: var(--white);
-            transform: translateY(-3px);
-        }
-
-        /* 為什麼選我們 */
-        .info-section {
-            max-width: 1100px;
-            margin: 5rem auto;
-            padding: 0 2rem;
-            text-align: center;
-        }
-
-        .info-section h2 {
-            font-size: 2.2rem;
-            color: var(--dark-green);
-            margin-bottom: 0.5rem;
-        }
-
-        .info-section p.sub-title {
-            color: var(--primary-green);
             font-size: 1.1rem;
-            margin-bottom: 3rem;
+            font-weight: 900;
+            display: inline-block;
         }
 
-        .info-grid {
+        /* 為什麼選我們、產業賦能、體驗、實景通用網格 */
+        .info-section, .empower-section, .experience-section, .farmers-section {
+            padding: 5rem 2rem;
+        }
+        
+        .info-section { background: #f8fdf9; text-align: center; }
+        .empower-section { background: var(--light-green); }
+        .experience-section { background: var(--white); }
+        .farmers-section { background: #f1f8f3; }
+
+        .section-header, .info-section .header-box {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 3rem auto;
+        }
+
+        .section-header h2, .info-section h2 { font-size: 2.2rem; color: var(--dark-green); margin-bottom: 0.5rem; }
+        .section-header p, .info-section p.sub-title { color: var(--primary-green); font-size: 1.1rem; margin-bottom: 2rem; }
+
+        .common-grid {
+            max-width: 1200px;
+            margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-            gap: 1.8rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .card-box {
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
         }
 
         .info-box {
@@ -488,96 +452,32 @@
             border-radius: 15px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.04);
             border-top: 4px solid var(--primary-green);
-            transition: transform 0.3s;
         }
 
-        .info-box:hover {
-            transform: translateY(-5px);
+        .img-cover {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
         }
 
-        .info-box h3 {
-            color: var(--primary-green);
-            margin: 1rem 0 0.5rem 0;
-            font-size: 1.25rem;
-        }
-
-        .info-box p {
-            color: var(--gray);
-            font-size: 0.95rem;
-        }
-
-        /* === 補回：地方產業賦能專區 (契作媒合 × 青創協助 × 數位行銷) === */
-        .empower-section {
-            background-color: var(--light-green);
-            padding: 5rem 2rem;
-        }
-
-        .section-header {
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto 3rem auto;
-        }
-
-        .section-header h2 {
-            font-size: 2.2rem;
+        .tag-abs {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: var(--accent-yellow);
             color: var(--dark-green);
-            margin-bottom: 0.5rem;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
         }
+        
+        .tag-abs.bottom { top: auto; bottom: 12px; background: rgba(27, 67, 50, 0.85); color: var(--white); }
 
-        .section-header p {
-            color: var(--primary-green);
-            font-size: 1.1rem;
-        }
-
-        .empower-grid {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2.5rem;
-        }
-
-        .empower-card {
-            background: var(--white);
-            border-radius: 16px;
-            padding: 2.5rem 2rem;
-            border: 2px solid transparent;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            transition: all 0.3s;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.03);
-        }
-
-        .empower-card:hover {
-            border-color: var(--primary-green);
-            transform: translateY(-4px);
-            box-shadow: 0 12px 24px rgba(45, 106, 79, 0.08);
-        }
-
-        .empower-icon {
-            font-size: 3rem;
-            margin-bottom: 1.2rem;
-            background: var(--light-yellow);
-            width: 70px;
-            height: 70px;
-            line-height: 70px;
-            text-align: center;
-            border-radius: 16px;
-        }
-
-        .empower-card h3 {
-            color: var(--dark-green);
-            font-size: 1.4rem;
-            margin-bottom: 1rem;
-        }
-
-        .empower-card p {
-            color: var(--gray);
-            font-size: 0.95rem;
-            margin-bottom: 1.5rem;
-            flex: 1;
-        }
+        .card-content { padding: 1.5rem; flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
+        .card-content h3 { font-size: 1.3rem; color: var(--dark-green); margin-bottom: 0.6rem; }
+        .card-content p { color: var(--gray); font-size: 0.95rem; margin-bottom: 1rem; }
 
         .empower-list {
             list-style: none;
@@ -600,7 +500,7 @@
             font-size: 0.8rem;
         }
 
-        .btn-empower {
+        .btn-action {
             background: var(--light-yellow);
             color: var(--dark-green);
             border: none;
@@ -608,216 +508,37 @@
             border-radius: 8px;
             font-weight: bold;
             cursor: pointer;
-            transition: all 0.2s;
-            text-align: center;
-            text-decoration: none;
-            display: block;
-        }
-
-        .btn-empower:hover {
-            background: var(--accent-yellow);
-        }
-
-        /* === 補回：食農體驗與產地小旅行專區 === */
-        .experience-section {
-            background: var(--white);
-            padding: 5rem 2rem;
-        }
-
-        .experience-grid {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-        }
-
-        .exp-card {
-            background: #f8fdf9;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.04);
-            border: 1px solid #e2e8f0;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .exp-img {
-            height: 200px;
-            background-size: cover;
-            background-position: center;
-            position: relative;
-        }
-
-        .exp-tag {
-            position: absolute;
-            top: 12px;
-            left: 12px;
-            background: var(--accent-yellow);
-            color: var(--dark-green);
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: bold;
-        }
-
-        .exp-content {
-            padding: 1.8rem;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .exp-content h3 {
-            color: var(--dark-green);
-            font-size: 1.3rem;
-            margin-bottom: 0.6rem;
-        }
-
-        .exp-content p {
-            color: var(--gray);
-            font-size: 0.95rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .exp-info-bar {
-            display: flex;
-            justify-content: space-between;
-            background: var(--white);
-            padding: 0.8rem 1rem;
-            border-radius: 8px;
-            font-size: 0.85rem;
-            color: var(--text-dark);
-            margin-bottom: 1.5rem;
-            font-weight: 500;
-            border: 1px solid #e2e8f0;
-        }
-
-        .btn-exp {
-            background: var(--dark-green);
-            color: var(--accent-yellow);
-            border: none;
-            padding: 0.8rem;
-            border-radius: 8px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background 0.3s;
             width: 100%;
         }
 
-        .btn-exp:hover {
-            background: var(--primary-green);
-            color: var(--white);
-        }
+        footer { background-color: var(--dark-green); color: var(--light-green); text-align: center; padding: 3rem 2rem; }
 
-        /* === 補回：契作小農與純粹農場實景 (無人像) === */
-        .farmers-section {
-            background-color: #f1f8f3;
-            padding: 5rem 2rem;
-        }
+        /* =========================================
+           📱 手機版專屬響應式設定 (Responsive Design)
+           ========================================= */
+        @media (max-width: 768px) {
+            .nav-container { flex-direction: column; gap: 1rem; padding: 1rem; text-align: center; }
+            .nav-links { justify-content: center; width: 100%; }
+            .user-badge { width: 100%; text-align: center; }
 
-        .farmers-grid {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
-        }
+            .hero { padding: 3rem 1rem; }
+            .hero h1 { font-size: 1.8rem; }
+            .hero p { font-size: 1rem; }
+            
+            .step-container, .redirect-card { margin-top: -1.5rem; padding: 1.5rem; border-radius: 12px; width: 95%; }
+            
+            .logistics-grid, .plans-grid, .common-grid, .info-grid { 
+                grid-template-columns: 1fr; 
+                gap: 1.2rem;
+            }
 
-        .farmer-card {
-            background: var(--white);
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-            display: flex;
-            flex-direction: column;
-            transition: transform 0.3s;
-        }
-
-        .farmer-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .farmer-img {
-            height: 220px;
-            background-size: cover;
-            background-position: center;
-            position: relative;
-        }
-
-        .location-tag {
-            position: absolute;
-            bottom: 10px;
-            left: 10px;
-            background: rgba(27, 67, 50, 0.85);
-            color: var(--light-yellow);
-            padding: 0.3rem 0.8rem;
-            border-radius: 8px;
-            font-size: 0.85rem;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-
-        .farmer-info {
-            padding: 1.5rem;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .farmer-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            margin-bottom: 0.8rem;
-            border-bottom: 1px dashed #eee;
-            padding-bottom: 0.8rem;
-        }
-
-        .farmer-name {
-            font-size: 1.3rem;
-            font-weight: bold;
-            color: var(--dark-green);
-        }
-
-        .farmer-role {
-            font-size: 0.9rem;
-            color: var(--primary-green);
-            background: var(--light-green);
-            padding: 0.2rem 0.6rem;
-            border-radius: 12px;
-        }
-
-        .crop-list {
-            font-size: 0.95rem;
-            color: var(--text-dark);
-            margin-bottom: 1rem;
-            font-weight: 500;
-        }
-
-        .crop-list span {
-            color: var(--primary-green);
-        }
-
-        .farmer-quote {
-            font-size: 0.9rem;
-            color: var(--gray);
-            font-style: italic;
-            background: #f8fdf9;
-            padding: 0.8rem;
-            border-left: 3px solid var(--accent-yellow);
-            border-radius: 4px;
-        }
-
-        footer {
-            background-color: var(--dark-green);
-            color: var(--light-green);
-            text-align: center;
-            padding: 3rem 2rem;
+            .step-title, .section-header h2, .info-section h2, .redirect-card h2 { font-size: 1.5rem; line-height: 1.3; }
+            .redirect-card p, .section-header p { font-size: 1rem; }
+            
+            .redirect-section, .info-section, .empower-section, .experience-section, .farmers-section { padding: 3rem 1rem; }
+            
+            .btn-redirect { padding: 0.8rem 1.5rem; font-size: 1rem; width: 100%; text-align: center; justify-content: center; }
+            .plan-price { font-size: 1.6rem; }
         }
     </style>
 </head>
@@ -825,15 +546,11 @@
 
     <header>
         <div class="nav-container">
-            <a href="#" class="logo">
-                🌱 家樓下微農場 <span>淡海新市鎮特供</span>
-            </a>
+            <a href="#" class="logo">🌱 家樓下微農場 <span>淡海新市鎮特供</span></a>
             <ul class="nav-links">
                 <li><a href="#subscribe">訂閱方案</a></li>
                 <li><a href="status.html" style="color: var(--primary-green); font-weight: bold;">📍 實施現況</a></li>
                 <li><a href="#empower">契作與青創</a></li>
-                <li><a href="#experience">食農體驗</a></li>
-                <li><a href="#farmers">契作產地</a></li>
             </ul>
             <div class="user-badge">📍 服務區域：淡海新市鎮</div>
         </div>
@@ -850,11 +567,10 @@
         </div>
     </section>
 
-    <!-- 訂閱與精簡物流 (維持 2 大選項) -->
+    <!-- 訂閱與精簡物流 -->
     <div class="step-container" id="subscribe">
-        
         <div class="station-selector">
-            <label for="station">第一步：選擇你居住的社區大樓 / 鄰近輕軌站</label>
+            <label>第一步：選擇你居住的大樓社區 / 鄰近輕軌站</label>
             <select id="station">
                 <option value="">請選擇新市鎮取貨據點...</option>
                 <option value="淡海輕軌-新市一路站 / 行政中心站">🚈 淡海輕軌站點 (已設置小農蔬果販賣機)</option>
@@ -864,32 +580,27 @@
             </select>
         </div>
 
-        <div class="step-title" id="logistics-section">第二步：選擇「冷鏈物流與取貨方式」（2大彈性方案）</div>
+        <div class="step-title">第二步：選擇「冷鏈物流與取貨方式」（2大彈性方案）</div>
         <div class="logistics-grid">
             <div class="logistics-card active" onclick="selectLogistics(this, '智慧自取 (輕軌站/社區保鮮櫃)', 0)">
-                <div>
-                    <div class="logistics-header">
-                        <span class="logistics-title">❄️ 運送智取（輕軌站 / 社區櫃）</span>
-                        <span class="logistics-price">免運費</span>
-                    </div>
-                    <p class="logistics-desc">配送至下班必經的淡海輕軌站蔬果販賣機，或社區 1F 智慧保鮮櫃，輸入密碼隨時取件。</p>
+                <div class="logistics-header">
+                    <span class="logistics-title">❄️ 運送智取（輕軌站/社區櫃）</span>
+                    <span class="logistics-price">免運費</span>
                 </div>
+                <p class="logistics-desc">配送至下班必經的淡海輕軌站蔬果販賣機，或社區 1F 智慧保鮮櫃，輸入密碼隨時取件。</p>
                 <div class="logistics-tip">💡 適合：緊湊通勤族、常加班需要 24H 隨時彈性取件的住戶。</div>
             </div>
-
             <div class="logistics-card" onclick="selectLogistics(this, '外送平台即時宅配 (直送家門/管理室)', 50)">
-                <div>
-                    <div class="logistics-header">
-                        <span class="logistics-title">🛵 外送平台即時宅配到府 / 管理室</span>
-                        <span class="logistics-price">+NT$ 50 /次</span>
-                    </div>
-                    <p class="logistics-desc">串聯 Lalamove、Foodpanda 外送員至農地蔬果站自取商品，即時直送到家中或管理室。</p>
+                <div class="logistics-header">
+                    <span class="logistics-title">🛵 外送平台即時宅配到府/管理室</span>
+                    <span class="logistics-price">+NT$ 50 /次</span>
                 </div>
+                <p class="logistics-desc">串聯 Lalamove、Foodpanda 外送員至農地蔬果站自取商品，即時直送到家中或管理室。</p>
                 <div class="logistics-tip">💡 適合：不想出門、居家工作、家中有長輩或需要專人送門口者。</div>
             </div>
         </div>
 
-        <div class="step-title" style="margin-top: 2rem;">第三步：盲盒避雷針（剔除家人不吃的食材）</div>
+        <div class="step-title">第三步：盲盒避雷針（剔除家人不吃的食材）</div>
         <div class="dislike-section">
             <p>請勾選<b>絕對不希望收到</b>的作物（小農配菜時會自動為您替換為同等值當季蔬菜）：</p>
             <div class="veggie-grid">
@@ -937,201 +648,177 @@
         <div class="redirect-card">
             <h2>📍 想看我們如何把農田搬進輕軌與社區？</h2>
             <p>我們結合科技物聯網、即時外送平台與在地交通樞紐，完整打造「從田間到樓下」的低碳短鏈生態系！</p>
-            
             <div class="redirect-features">
                 <div class="rf-item">🚈 輕軌站販賣機</div>
                 <div class="rf-item">🛵 Lalamove/Foodpanda 串接</div>
                 <div class="rf-item">🤖 IoT 自動補貨偵測</div>
                 <div class="rf-item">🍽️ 契作餐廳產銷</div>
             </div>
-
-            <a href="status.html" class="btn-redirect">
-                📑 查看「實際使用情境與藍圖」白皮書 ➔
-            </a>
+            <a href="status.html" class="btn-redirect">📑 查看「實際使用情境與藍圖」白皮書 ➔</a>
         </div>
     </section>
 
-    <!-- 為什麼選我們 -->
-    <section class="info-section" id="advantages">
-        <h2>為什麼新市鎮的家庭都選擇我們？</h2>
-        <p class="sub-title">解決現代雙薪家庭與社區的生鮮痛點，讓在地良食成為美好的日常</p>
-        
-        <div class="info-grid">
-            <div class="info-box">
-                <div style="font-size: 2.8rem;">⏱️</div>
-                <h3>省下每日 2 小時</h3>
-                <p>通勤回淡水已經好累，不用再趕去傳統市場人擠人，下班下樓開冰箱，取菜就能馬上料理。</p>
-            </div>
-            <div class="info-box">
-                <div style="font-size: 2.8rem;">👨‍🌾</div>
-                <h3>專治選擇障礙</h3>
-                <p>當季小農盲盒配菜！大地收成什麼就吃什麼，天天有變化，還能透過「避雷針」自動跳過家人不吃的食材。</p>
-            </div>
-            <div class="info-box">
-                <div style="font-size: 2.8rem;">❄️</div>
-                <h3>全程冷鏈・絕不失溫</h3>
-                <p>送進社區專屬智慧冷藏櫃或外送直送，徹底告別常規宅配因「無人收件」而在大廳放壞的煩惱。</p>
-            </div>
-            <div class="info-box">
-                <div style="font-size: 2.8rem;">🌱</div>
-                <h3>低碳短鏈・產地直通</h3>
-                <p>嚴選淡水、三芝周遭 15 公里內契作農莊。縮短食物里程，從田間到餐桌最快只要半天，極致新鮮！</p>
-            </div>
-        </div>
-    </section>
+    <style>
+    /* 修正網格設定，強制電腦版一行四格 */
+    .info-grid {
+        display: grid;
+        /* 這裡設定為 1fr 1fr 1fr 1fr，確保電腦版永遠維持四欄 */
+        grid-template-columns: repeat(4, 1fr); 
+        gap: 1.5rem;
+        margin-top: 2rem;
+    }
 
-    <!-- === 完整補回：地方生態系賦能專區 === -->
+    /* 手機版時才變回單行 */
+    @media (max-width: 900px) {
+        .info-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+
+
+<section class="info-section" id="advantages">
+    <h2>為什麼新市鎮的家庭都選擇我們？</h2>
+    <p class="sub-title">解決現代雙薪家庭與社區的生鮮痛點，讓在地良食成為美好的日常</p>
+    
+    <div class="info-grid">
+        <div class="info-box">
+            <div style="font-size: 2.5rem;">⏱️</div>
+            <h3>省下每日 2 小時</h3>
+            <p>免去市場人擠人，下班下樓開冰箱，取菜馬上料理。</p>
+        </div>
+        <div class="info-box">
+            <div style="font-size: 2.5rem;">👨‍🌾</div>
+            <h3>專治選擇障礙</h3>
+            <p>當季小農盲盒，透過「避雷針」系統自動跳過不吃食材。</p>
+        </div>
+        <div class="info-box">
+            <div style="font-size: 2.5rem;">❄️</div>
+            <h3>全程冷鏈保鮮</h3>
+            <p>智慧櫃或外送直送，告別宅配無人收件的煩惱。</p>
+        </div>
+        <div class="info-box">
+            <div style="font-size: 2.5rem;">🌱</div>
+            <h3>低碳產地直通</h3>
+            <p>嚴選周遭 15 公里小農，從田間到餐桌，極致新鮮。</p>
+        </div>
+    </div>
+</section>
+
+    <!-- 地方生態系賦能專區 -->
     <section class="empower-section" id="empower">
         <div class="section-header">
             <h2>打造在地共榮生態系</h2>
             <p>我們不只服務社區家庭，更致力於串聯淡水在地小農、商圈店家與有志青年，共創永續農業價值。</p>
         </div>
-        <div class="empower-grid">
-            <div class="empower-card">
-                <div>
-                    <div class="empower-icon">🤝</div>
-                    <h3>淡水小農 × 店家契作媒合</h3>
-                    <p>針對淡水、新市鎮在地餐廳、早午餐與咖啡廳，提供客製化的穩定農作供應鏈，打造真正的「在地食材特色專區」。</p>
-                    <ul class="empower-list">
-                        <li>穩定收購價格，保障小農基本利潤</li>
-                        <li>為餐廳打造「淡水在地產地餐桌」特色</li>
-                        <li>減少中盤物流損耗，提供 B2B 專屬優惠</li>
-                    </ul>
-                </div>
-                <button class="btn-empower" onclick="alert('🤝 歡迎商業夥伴！請留下您的店鋪名稱與聯絡方式，我們將安排專人為您媒合適合的淡水小農。')">餐飲店家契作洽詢</button>
+        <div class="common-grid">
+            <div class="card-box" style="padding: 2.5rem 2rem;">
+                <div style="font-size: 3rem; margin-bottom: 1.2rem;">🤝</div>
+                <h3>淡水小農 × 店家契作媒合</h3>
+                <p style="color: var(--gray); margin-bottom: 1.5rem;">針對淡水、新市鎮在地餐廳、早午餐與咖啡廳，提供客製化的穩定農作供應鏈，打造真正的「在地食材特色專區」。</p>
+                <ul class="empower-list">
+                    <li>穩定收購價格，保障小農基本利潤</li>
+                    <li>為餐廳打造「淡水在地產地餐桌」特色</li>
+                    <li>減少中盤物流損耗，提供 B2B 專屬優惠</li>
+                </ul>
+                <button class="btn-action" onclick="alert('歡迎餐飲店家洽詢！我們將安排專人為您媒合適合的淡水小農。')">餐飲店家契作洽詢</button>
             </div>
-
-            <div class="empower-card">
-                <div>
-                    <div class="empower-icon">🚀</div>
-                    <h3>地方青年創業協助</h3>
-                    <p>鼓勵年輕人投入地方農業與創新零售！提供完善的微零售加盟、物流轉運站點運作與品牌育成輔導，降低青創風險。</p>
-                    <ul class="empower-list">
-                        <li>輕軌站與社區無人販賣機「低門檻加盟」</li>
-                        <li>短鏈物流綠色配送夥伴（微創業指導）</li>
-                        <li>提供財務試算、選址與品牌行銷教育訓練</li>
-                    </ul>
-                </div>
-                <button class="btn-empower" onclick="alert('🚀 歡迎加入青創行列！我們為青年創業家提供從設備、物流到宣傳的一站式資源陪伴。')">青創孵化計畫報名</button>
+            <div class="card-box" style="padding: 2.5rem 2rem;">
+                <div style="font-size: 3rem; margin-bottom: 1.2rem;">🚀</div>
+                <h3>地方青年創業協助</h3>
+                <p style="color: var(--gray); margin-bottom: 1.5rem;">鼓勵年輕人投入地方農業與創新零售！提供完善的微零售加盟、物流轉運站點運作與品牌育成輔導，降低青創風險。</p>
+                <ul class="empower-list">
+                    <li>輕軌站與社區無人販賣機「低門檻加盟」</li>
+                    <li>短鏈物流綠色配送夥伴（微創業指導）</li>
+                    <li>提供財務試算、選址與品牌行銷教育訓練</li>
+                </ul>
+                <button class="btn-action" onclick="alert('歡迎青創夥伴加入！我們為青年創業家提供一站式資源陪伴。')">青創孵化計畫報名</button>
             </div>
-
-            <div class="empower-card">
-                <div>
-                    <div class="empower-icon">🎬</div>
-                    <h3>農場數位行銷與宣傳協助</h3>
-                    <p>小農專注種出好東西，行銷跟包裝交給我們！為合作農戶提供專業的視覺升級與數位推廣服務，讓好品質被所有人看見。</p>
-                    <ul class="empower-list">
-                        <li>協助產地故事「短影音拍攝與剪輯」</li>
-                        <li>農產品生產履歷與視覺包裝設計</li>
-                        <li>平台與社群「農場最新動態與資訊公布」</li>
-                    </ul>
-                </div>
-                <button class="btn-empower" onclick="alert('🎬 小農行銷推廣服務：我們由專業數位創意團隊，協助農場拍攝紀錄片與社群行銷宣傳！')">小農數位行銷諮詢</button>
+            <div class="card-box" style="padding: 2.5rem 2rem;">
+                <div style="font-size: 3rem; margin-bottom: 1.2rem;">🎬</div>
+                <h3>農場數位行銷與宣傳協助</h3>
+                <p style="color: var(--gray); margin-bottom: 1.5rem;">小農專注種出好東西，行銷跟包裝交給我們！為合作農戶提供專業的視覺升級與數位推廣服務，讓好品質被所有人看見。</p>
+                <ul class="empower-list">
+                    <li>協助產地故事「短影音拍攝與剪輯」</li>
+                    <li>農產品生產履歷與視覺包裝設計</li>
+                    <li>平台與社群「農場最新動態與資訊公布」</li>
+                </ul>
+                <button class="btn-action" onclick="alert('由專業數位創意團隊為您包裝！協助農場拍攝紀錄片與社群行銷宣傳。')">小農數位行銷諮詢</button>
             </div>
         </div>
     </section>
 
-    <!-- === 完整補回：食農體驗與產地小旅行專區 === -->
+    <!-- 食農體驗 -->
     <section class="experience-section" id="experience">
         <div class="section-header">
             <h2>從餐桌走進田間：週末食農體驗</h2>
             <p>光吃當季蔬菜還不夠！週末帶領家人與小孩親自造訪淡水契作農莊，親手觸摸大地，體驗食物從無到有的美妙旅程。</p>
         </div>
-        <div class="experience-grid">
-            <div class="exp-card">
-                <div class="exp-img" style="background-image: url('https://images.unsplash.com/photo-1595974482597-4b8da8879bc5?auto=format&fit=crop&w=600&q=80');">
-                    <span class="exp-tag">🌱 春季限定熱烈報名中</span>
+        <div class="common-grid">
+            <div class="card-box">
+                <div class="img-cover" style="background-image: url('https://images.unsplash.com/photo-1595974482597-4b8da8879bc5?auto=format&fit=crop&w=600&q=80');">
+                    <span class="tag-abs">🌱 春季限定熱烈報名中</span>
                 </div>
-                <div class="exp-content">
+                <div class="card-content">
                     <div>
                         <h3>公司田溪綠竹筍尋寶 × 挖筍手作營</h3>
                         <p>跟著曾國慶大哥走進淡水乾淨水域旁茂密的竹林，學習如何找到最甜美的黃金綠竹筍，還能親手製作涼拌竹筍與竹筒飯！</p>
-                        <div class="exp-info-bar">
-                            <span>📍 地點：淡水陽光農場</span>
-                            <span>⏳ 體驗時長：2.5 小時</span>
-                        </div>
+                        <p style="font-size: 0.85rem; background: #f1f5f9; padding: 0.5rem; border-radius: 5px;">📍 地點：淡水陽光農場 | ⏳ 體驗時長：2.5 小時</p>
                     </div>
-                    <button class="btn-exp" onclick="alert('🎟️ 已將您列入【綠竹筍尋寶營】優先預約名單！平台訂閱戶享有報名費 8 折優惠。')">立即預約體驗 (訂閱戶 8 折)</button>
+                    <button class="btn-action" style="background: var(--dark-green); color: var(--accent-yellow); margin-top: 1rem;">立即預約體驗 (訂閱戶 8 折)</button>
                 </div>
             </div>
-
-            <div class="exp-card">
-                <div class="exp-img" style="background-image: url('https://images.unsplash.com/photo-1592841200221-a6898f307baa?auto=format&fit=crop&w=600&q=80');">
-                    <span class="exp-tag">🍅 親子最愛熱門行程</span>
+            <div class="card-box">
+                <div class="img-cover" style="background-image: url('https://images.unsplash.com/photo-1592841200221-a6898f307baa?auto=format&fit=crop&w=600&q=80');">
+                    <span class="tag-abs">🍅 親子最愛熱門行程</span>
                 </div>
-                <div class="exp-content">
+                <div class="card-content">
                     <div>
                         <h3>溫室紅玉番茄採果 × 窯烤披薩派對</h3>
                         <p>造訪大屯山麓的無毒溫室園區！親手摘採甜度破表的溫室紅玉番茄，下午在農莊庭院以當季鮮蔬製作專屬的義式窯烤披薩。</p>
-                        <div class="exp-info-bar">
-                            <span>📍 地點：三芝八甲生機園</span>
-                            <span>⏳ 體驗時長：3.0 小時</span>
-                        </div>
+                        <p style="font-size: 0.85rem; background: #f1f5f9; padding: 0.5rem; border-radius: 5px;">📍 地點：三芝八甲生機園 | ⏳ 體驗時長：3.0 小時</p>
                     </div>
-                    <button class="btn-exp" onclick="alert('🎟️ 已將您列入【採果窯烤披薩派對】優先預約名單！將由專人寄送週末場次表給您。')">立即預約體驗 (親子半價)</button>
+                    <button class="btn-action" style="background: var(--dark-green); color: var(--accent-yellow); margin-top: 1rem;">立即預約體驗 (親子半價)</button>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- === 完整補回：契作小農與純粹農場實景 (無人像) === -->
+    <!-- 契作小農實景 -->
     <section class="farmers-section" id="farmers">
         <div class="section-header">
             <h2>誰為我們種下這週的美味？</h2>
             <p>嚴選新市鎮 15 公里內的在地友善農場，純淨水土栽培，看得見產地最安心。</p>
         </div>
-        <div class="farmers-grid">
-            <div class="farmer-card">
-                <div class="farmer-img" style="background-image: url('https://images.unsplash.com/photo-1574943320219-553eb213f72d?auto=format&fit=crop&w=600&q=80');">
-                    <div class="location-tag">📍 淡水區・公司田溪流域</div>
+        <div class="common-grid">
+            <div class="card-box">
+                <div class="img-cover" style="background-image: url('https://images.unsplash.com/photo-1574943320219-553eb213f72d?auto=format&fit=crop&w=600&q=80');">
+                    <span class="tag-abs bottom">📍 淡水區・公司田溪流域</span>
                 </div>
-                <div class="farmer-info">
-                    <div>
-                        <div class="farmer-header">
-                            <span class="farmer-name">陽光生態農場</span>
-                            <span class="farmer-role">曾國慶 契作</span>
-                        </div>
-                        <div class="crop-list">
-                            🌱 主打作物：<span>鮮甜綠竹筍、當季葉菜類、芥藍</span>
-                        </div>
-                        <p class="farmer-quote">「我們就在淡水在地！引用大屯山乾淨水源灌溉，堅持順應時令栽種，現採現送，真正在地人在地食！」</p>
-                    </div>
+                <div class="card-content">
+                    <h3>陽光生態農場 (曾國慶 契作)</h3>
+                    <p>主打作物：<span style="color: var(--primary-green); font-weight: bold;">鮮甜綠竹筍、當季葉菜類、芥藍</span></p>
+                    <p style="font-style: italic; background: #f8fdf9; padding: 0.8rem; border-left: 3px solid var(--accent-yellow);">「引用大屯山乾淨水源灌溉，堅持順應時令栽種，真正在地人在地食！」</p>
                 </div>
             </div>
-
-            <div class="farmer-card">
-                <div class="farmer-img" style="background-image: url('https://images.unsplash.com/photo-1592841200221-a6898f307baa?auto=format&fit=crop&w=600&q=80');">
-                    <div class="location-tag">📍 三芝區・大屯山麓</div>
+            <div class="card-box">
+                <div class="img-cover" style="background-image: url('https://images.unsplash.com/photo-1592841200221-a6898f307baa?auto=format&fit=crop&w=600&q=80');">
+                    <span class="tag-abs bottom">📍 三芝區・大屯山麓</span>
                 </div>
-                <div class="farmer-info">
-                    <div>
-                        <div class="farmer-header">
-                            <span class="farmer-name">八甲溫室生機園</span>
-                            <span class="farmer-role">林秋月 契作</span>
-                        </div>
-                        <div class="crop-list">
-                            🍅 主打作物：<span>溫室紅玉番茄、彩色甜椒、小黃瓜</span>
-                        </div>
-                        <p class="farmer-quote">「利用大屯山腳日夜溫差大的優勢，我們的番茄跟瓜果甜度特別高！溫室網室栽培，完全不用化肥與農藥。」</p>
-                    </div>
+                <div class="card-content">
+                    <h3>八甲溫室生機園 (林秋月 契作)</h3>
+                    <p>主打作物：<span style="color: var(--primary-green); font-weight: bold;">溫室紅玉番茄、彩色甜椒、小黃瓜</span></p>
+                    <p style="font-style: italic; background: #f8fdf9; padding: 0.8rem; border-left: 3px solid var(--accent-yellow);">「利用溫差大優勢，番茄甜度特別高！網室栽培，完全不用化肥農藥。」</p>
                 </div>
             </div>
-
-            <div class="farmer-card">
-                <div class="farmer-img" style="background-image: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=600&q=80');">
-                    <div class="location-tag">📍 石門區・老梅丘陵</div>
+            <div class="card-box">
+                <div class="img-cover" style="background-image: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=600&q=80');">
+                    <span class="tag-abs bottom">📍 石門區・老梅丘陵</span>
                 </div>
-                <div class="farmer-info">
-                    <div>
-                        <div class="farmer-header">
-                            <span class="farmer-name">海風放牧農莊</span>
-                            <span class="farmer-role">陳志明 契作</span>
-                        </div>
-                        <div class="crop-list">
-                            🥚 主打作物：<span>放牧快樂土雞蛋、紫心甘藷、紅蘿蔔</span>
-                        </div>
-                        <p class="farmer-quote">「讓雞隻在山坡地奔跑曬太陽，吃的是在地即期的有機格外蔬果，產出的雞蛋蛋黃Ｑ彈飽滿，給小孩吃最好！」</p>
-                    </div>
+                <div class="card-content">
+                    <h3>海風放牧農莊 (陳志明 契作)</h3>
+                    <p>主打作物：<span style="color: var(--primary-green); font-weight: bold;">放牧快樂土雞蛋、紫心甘藷、紅蘿蔔</span></p>
+                    <p style="font-style: italic; background: #f8fdf9; padding: 0.8rem; border-left: 3px solid var(--accent-yellow);">「雞隻在山坡地奔跑曬太陽，吃在地有機格外蔬果，蛋黃Ｑ彈飽滿！」</p>
                 </div>
             </div>
         </div>
@@ -1149,7 +836,6 @@
         function selectLogistics(cardElement, name, fee) {
             const cards = document.querySelectorAll('.logistics-card');
             cards.forEach(card => card.classList.remove('active'));
-            
             cardElement.classList.add('active');
             selectedLogisticsName = name;
             logisticsFee = fee;
@@ -1162,17 +848,13 @@
                 document.getElementById('station').focus();
                 return;
             }
-
             const dislikes = [];
             const checkboxes = document.querySelectorAll('.veggie-checkbox:checked');
-            checkboxes.forEach((cb) => {
-                dislikes.push(cb.value);
-            });
+            checkboxes.forEach((cb) => { dislikes.push(cb.value); });
             let dislikeMsg = dislikes.length > 0 ? "\n🚫 避雷清單：" + dislikes.join("、 ") : "\n✨ 避雷清單：無 (什麼都吃！)";
-
             const totalPrice = basePrice + logisticsFee;
             let feeMsg = logisticsFee > 0 ? ` (含即時外送費 NT$ ${logisticsFee})` : " (輕軌/社區站自取免運費)";
-
+            
             alert(`🎉 訂閱設定成功！\n\n📦 選擇方案：${planName}\n🏠 配送區域/站點：${station}\n🚚 物流方式：${selectedLogisticsName}\n💵 每次配送總計：NT$ ${totalPrice}${feeMsg}${dislikeMsg}\n\n即將跳轉至信用卡授權與即時外送排程系統...`);
         }
     </script>
